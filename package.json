@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "wdio": "wdio run wdio.conf.js"
   },
   "keywords": [],
@@ -17,7 +16,11 @@
     "@wdio/mocha-framework": "^8.39.0",
     "@wdio/spec-reporter": "^8.39.0",
     "@wdio/visual-service": "^5.2.0",
+    "chromedriver": "^127.0.1",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-wait-for": "^3.0.11"
+  },
+  "dependencies": {
+    "wdio-geckodriver-service": "^5.0.2"
   }
 }

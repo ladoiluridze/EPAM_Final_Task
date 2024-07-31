@@ -1,10 +1,9 @@
-// test/pageobjects/DashboardPage.js
 const { $ } = require('@wdio/globals')
 
 const Page = require('./Page');
 
 class DashboardPage extends Page {
-    get title() { return $('//span[@class="title"]'); }
+    get title() { return $('//*[@class="app_logo"]'); }
 
     isTitleDisplayed() {
         return this.title.isDisplayed();

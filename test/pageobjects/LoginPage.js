@@ -1,5 +1,4 @@
 // test/pageobjects/LoginPage.js
-const { $ } = require('@wdio/globals')
 
 const Page = require('./Page');
 
@@ -10,7 +9,7 @@ class LoginPage extends Page {
     get errorMessage() { return $('//h3[@data-test="error"]'); }
 
     open() {
-        return super.open('');
+        return super.open('/');
     }
 
     async login(username, password) {
