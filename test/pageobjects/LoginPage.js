@@ -1,5 +1,3 @@
-// test/pageobjects/LoginPage.js
-
 const Page = require('./Page');
 
 class LoginPage extends Page {
