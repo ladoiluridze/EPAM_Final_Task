@@ -1,34 +1,32 @@
 const { expect } = require('@wdio/globals')
 const LoginPage = require('../pageobjects/LoginPage');
 const DashboardPage = require('../pageobjects/DashboardPage');
+const {validCredentials, invalidCredentials, errorMessages, pageTitle} = require("../data/testData")
 
 describe('SauceDemo Login', () => {
-    beforeEach(() => {
-        LoginPage.open();
+    beforeEach( () => {
+         LoginPage.open();
     });
 
     it('should display error message for empty credentials', async () => {
-        await LoginPage.login('test', 'test');
+        await LoginPage.login(invalidCredentials.username, invalidCredentials.password);
         await LoginPage.clearInputs();
         await LoginPage.btnLogin.click();
-        await expect(LoginPage.errorMessage).toHaveTextContaining(
-            "Epic sadface: Username is required"
-          );
+        const errorMsg = await LoginPage.errorMessage.getText();
+        expect(errorMsg).toContain(errorMessages.emptyUsernamePassword);
     });
 
     it('should display error message for missing password', async () => {
-        await LoginPage.inputUsername.setValue('test');
-        await LoginPage.inputPassword.setValue('test');
-        await LoginPage.inputPassword.clearValue();
+        await LoginPage.login(invalidCredentials.username, invalidCredentials.password);
+        await LoginPage.clearInputs();
         await LoginPage.btnLogin.click();
-        await expect(LoginPage.errorMessage).toHaveTextContaining(
-            "Epic sadface: Password is required"
-          );
+        const errorMsg = await LoginPage.errorMessage.getText();
+        expect(errorMsg).toContain(errorMessages.emptyPassword);        
     });
 
     it('should login with valid credentials', async () => {
-        await LoginPage.login('standard_user', 'secret_sauce');
+        await LoginPage.login(validCredentials.username, validCredentials.password);
         const isTitleDisplayed = await DashboardPage.title.getText();
-        await expect(isTitleDisplayed).toBe("Swag Labs");
+        await expect(isTitleDisplayed).toBe(pageTitle.title);
     });
 });
